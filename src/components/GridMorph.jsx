@@ -85,8 +85,8 @@ export default function GridMorph({
   waveRadius = 0.3,
   thickness = 15,
   glowIntensity = 0.15,
-  fadeDistance = 1.5,
-  vignetteStrength = 2.0,
+  fadeDistance = 3.0,
+  vignetteStrength = 4.0,
 }) {
   const containerRef = useRef(null)
   const mouseRef = useRef({ x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, active: 0 })

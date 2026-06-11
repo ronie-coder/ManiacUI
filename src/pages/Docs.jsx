@@ -31,7 +31,7 @@ import { Carousel } from './components/Carousel'`,
 // Override them in your own stylesheet:
 
 [data-theme='dark'] {
-  --accent: #7ec8e3;
+  --accent: #a855f7;
   --bg: #08080a;
 }
 
@@ -42,7 +42,7 @@ import { Carousel } from './components/Carousel'`,
 }
 
 const PROP_TABLE = [
-  { prop: 'color', type: 'string', default: '#7ec8e3', desc: 'Primary accent color for the component' },
+  { prop: 'color', type: 'string', default: '#a855f7', desc: 'Primary accent color for the component' },
   { prop: 'speed', type: 'number', default: '0.5', desc: 'Animation speed multiplier (0–2)' },
   { prop: 'intensity', type: 'number', default: '1.0', desc: 'Visual intensity of the effect' },
   { prop: 'className', type: 'string', default: '—', desc: 'Additional CSS class name' },

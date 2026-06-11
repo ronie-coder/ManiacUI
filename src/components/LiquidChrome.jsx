@@ -120,12 +120,13 @@ export default function LiquidChrome({
   color1 = '#2a1a3a',
   color2 = '#6366f1',
   color3 = '#06b6d4',
-  speed = 0.4,
+  speed = 0.6,
   scale = 1.5,
   distortion = 1.5,
   reflectivity = 0.6,
   interactive = true,
   customCursor = false,
+  children,
 }) {
   const containerRef = useRef(null)
   const cursorRef = useRef(null)
@@ -310,6 +311,7 @@ export default function LiquidChrome({
           <div className="lc-cursor-dot" />
         </div>
       )}
+      {children && <div className="lc-overlay">{children}</div>}
     </div>
   )
 }

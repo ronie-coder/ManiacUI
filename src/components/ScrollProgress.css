@@ -1,15 +1,9 @@
 .sp-root {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 48px;
+  left: 220px;
   right: 0;
   pointer-events: none;
-}
-
-.sp-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
 }
 
 .sp-bar {
@@ -17,38 +11,13 @@
   top: 0;
   left: 0;
   height: 100%;
-  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.05s linear;
+  will-change: width;
 }
 
-.sp-trail {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-}
-
-.sp-particle {
-  position: fixed;
-  top: 0;
-  width: var(--sp-size, 4px);
-  height: var(--sp-size, 4px);
-  background: var(--sp-color, #7ec8e3);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: sp-burst 1.2s ease-out forwards;
-  animation-delay: var(--sp-delay, 0s);
-}
-
-@keyframes sp-burst {
-  0% {
-    transform: translate(0, 0) scale(0);
-    opacity: 1;
-  }
-  30% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translate(var(--sp-dx, -40px), var(--sp-dy, -60px)) scale(1);
-    opacity: 0;
+@media (max-width: 768px) {
+  .sp-root {
+    left: 0;
   }
 }

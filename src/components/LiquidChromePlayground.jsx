@@ -63,28 +63,157 @@ export default function LiquidChromePlayground() {
   const [color1, setColor1] = useState('#2a1a3a')
   const [color2, setColor2] = useState('#6366f1')
   const [color3, setColor3] = useState('#06b6d4')
-  const [speed, setSpeed] = useState(0.15)
+  const [speed, setSpeed] = useState(0.6)
   const [scale, setScale] = useState(1.5)
   const [distortion, setDistortion] = useState(1.5)
   const [reflectivity, setReflectivity] = useState(0.6)
   const [interactive, setInteractive] = useState(true)
   const [customCursor, setCustomCursor] = useState(true)
+  const [showOverlay, setShowOverlay] = useState(true)
 
   const reset = useCallback(() => {
     setColor1('#2a1a3a')
     setColor2('#6366f1')
     setColor3('#06b6d4')
-    setSpeed(0.15)
+    setSpeed(0.6)
     setScale(1.5)
     setDistortion(1.5)
     setReflectivity(0.6)
     setInteractive(true)
     setCustomCursor(true)
-    setInteractive(true)
+    setShowOverlay(true)
   }, [])
 
   return (
     <div className="gp-page">
+      <style>{`
+        .lc-demo-content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          box-sizing: border-box;
+        }
+        .lc-demo-card {
+          background: rgba(10,10,15,0.15);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 16px;
+          padding: 32px 36px;
+          max-width: 380px;
+          width: 100%;
+          text-align: center;
+        }
+        .lc-demo-badge {
+          display: inline-block;
+          font-size: 9px;
+          font-weight: 600;
+          letter-spacing: 1.6px;
+          text-transform: uppercase;
+          padding: 4px 10px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, #6366f1, #06b6d4);
+          color: #fff;
+          margin-bottom: 14px;
+        }
+        .lc-demo-title {
+          font-size: 26px;
+          font-weight: 700;
+          margin: 0 0 8px;
+          background: linear-gradient(135deg, #6366f1, #06b6d4, #2a1a3a);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          letter-spacing: -0.3px;
+        }
+        .lc-demo-text {
+          font-size: 12px;
+          line-height: 1.6;
+          color: rgba(255,255,255,0.45);
+          margin: 0 0 20px;
+        }
+        .lc-demo-actions {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+        }
+        .lc-demo-btn {
+          padding: 7px 18px;
+          border-radius: 8px;
+          font-size: 11px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+        .lc-demo-btn.primary {
+          background: linear-gradient(135deg, #6366f1, #06b6d4);
+          color: #fff;
+          border: none;
+        }
+        .lc-demo-btn.secondary {
+          background: rgba(255,255,255,0.06);
+          color: rgba(255,255,255,0.6);
+          border: 1px solid rgba(255,255,255,0.08);
+        }
+        .lc-demo-btn.secondary:hover {
+          background: rgba(255,255,255,0.1);
+        }
+        .lc-toggle {
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          user-select: none;
+          padding: 6px 10px;
+          border-radius: 20px;
+          background: rgba(0,0,0,0.5);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(255,255,255,0.08);
+          transition: background 0.2s;
+        }
+        .lc-toggle:hover {
+          background: rgba(0,0,0,0.7);
+        }
+        .lc-toggle-label {
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.5);
+        }
+        .lc-toggle-track {
+          width: 32px;
+          height: 18px;
+          border-radius: 10px;
+          background: rgba(255,255,255,0.12);
+          position: relative;
+          transition: background 0.3s ease;
+        }
+        .lc-toggle-track.on {
+          background: linear-gradient(135deg, #6366f1, #06b6d4);
+        }
+        .lc-toggle-thumb {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #fff;
+          transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .lc-toggle-track.on .lc-toggle-thumb {
+          transform: translateX(14px);
+        }
+      `}</style>
       <div className="gp-hero">
         <h1 className="gp-title">Liquid Chrome</h1>
         <p className="gp-desc">
@@ -117,12 +246,34 @@ export default function LiquidChromePlayground() {
                   reflectivity={reflectivity}
                   interactive={interactive}
                   customCursor={customCursor}
-                />
+                >
+                  {showOverlay && (
+                    <div className="lc-demo-content">
+                      <div className="lc-demo-card">
+                        <div className="lc-demo-badge">Chrome Effect</div>
+                        <h2 className="lc-demo-title">Liquid Chrome</h2>
+                        <p className="lc-demo-text">
+                          A flowing metallic surface with domain-warped fractal noise and real-time cursor interaction.
+                        </p>
+                        <div className="lc-demo-actions">
+                          <span className="lc-demo-btn primary">Try now</span>
+                          <span className="lc-demo-btn secondary">Learn more</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <label className="lc-toggle" onClick={e => { e.stopPropagation(); setShowOverlay(v => !v) }}>
+                    <span className="lc-toggle-label">Overlay</span>
+                    <span className={`lc-toggle-track ${showOverlay ? 'on' : ''}`}>
+                      <span className="lc-toggle-thumb" />
+                    </span>
+                  </label>
+                </LiquidChrome>
               </div>
               <div className="gp-preview-bottom">
                 <div className="gp-preview-controls">
                   <Section title="FLOW">
-                    <RangeRow label="Speed" value={speed} min={0} max={0.8} step={0.01} onChange={setSpeed} />
+                    <RangeRow label="Speed" value={speed} min={0} max={3} step={0.05} onChange={setSpeed} />
                     <RangeRow label="Scale" value={scale} min={0.5} max={5} step={0.1} onChange={setScale} />
                     <RangeRow label="Distortion" value={distortion} min={0} max={4} step={0.1} onChange={setDistortion} />
                     <RangeRow label="Reflectivity" value={reflectivity} min={0} max={1.5} step={0.05} onChange={setReflectivity} />

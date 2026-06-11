@@ -5,7 +5,6 @@ import SearchDialog from './components/SearchDialog'
 import CarouselPlayground from './components/CarouselPlayground'
 import LanyardPlayground from './components/LanyardPlayground'
 import BlobPlayground from './components/BlobPlayground'
-import TiltCardPlayground from './components/TiltCardPlayground'
 import FluidOrbPlayground from './components/FluidOrbPlayground'
 import ShockButtonPlayground from './components/ShockButtonPlayground'
 import ScrambleTextPlayground from './components/ScrambleTextPlayground'
@@ -21,6 +20,7 @@ import KineticTextPlayground from './components/KineticTextPlayground'
 import GradientMeshPlayground from './components/GradientMeshPlayground'
 import NoiseBorderPlayground from './components/NoiseBorderPlayground'
 import ScrollProgressPlayground from './components/ScrollProgressPlayground'
+import CubePitPlayground from './components/CubePitPlayground'
 import Docs from './pages/Docs'
 import './App.css'
 
@@ -163,7 +163,6 @@ export default function App() {
           {activeId === 'carousel' && <CarouselPlayground />}
           {activeId === 'lanyard' && <LanyardPlayground />}
           {activeId === 'blob' && <BlobPlayground />}
-          {activeId === 'tiltcard' && <TiltCardPlayground />}
           {activeId === 'fluidorb' && <FluidOrbPlayground />}
           {activeId === 'shockbutton' && <ShockButtonPlayground />}
           {activeId === 'scrambletext' && <ScrambleTextPlayground />}
@@ -179,6 +178,7 @@ export default function App() {
           {activeId === 'gradientmesh' && <GradientMeshPlayground />}
           {activeId === 'noiseborder' && <NoiseBorderPlayground />}
           {activeId === 'scrollprogress' && <ScrollProgressPlayground />}
+          {activeId === 'cubepit' && <CubePitPlayground />}
         </main>
 
         <SearchDialog

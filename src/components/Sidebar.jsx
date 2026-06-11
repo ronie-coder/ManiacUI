@@ -8,8 +8,9 @@ const GROUPS = [
       { id: 'carousel', name: '3D Carousel' },
       { id: 'lanyard', name: 'Lanyard' },
       { id: 'blob', name: 'Blob' },
-      { id: 'tiltcard', name: 'Tilt Card' },
+
       { id: 'fluidorb', name: 'Fluid Orb' },
+      { id: 'cubepit', name: 'CubePit' },
     ],
   },
   {

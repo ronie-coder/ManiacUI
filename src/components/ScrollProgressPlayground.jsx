@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import Editor from '@monaco-editor/react'
 import ScrollProgress from './ScrollProgress'
 import scrollSource from './ScrollProgress.jsx?raw'
@@ -7,14 +7,10 @@ import './Playground.css'
 
 const TABS = ['Preview', 'Code']
 const PROPS = [
-  { name: 'color', type: 'string', default: "'#7ec8e3'", desc: 'Primary accent color' },
-  { name: 'height', type: 'number', default: '3', desc: 'Bar height in pixels' },
-  { name: 'glow', type: 'boolean', default: 'true', desc: 'Show shadow glow on the bar' },
-  { name: 'particles', type: 'boolean', default: 'true', desc: 'Enable burst particles on section change' },
-  { name: 'particleCount', type: 'number', default: '20', desc: 'Number of particles per burst' },
-  { name: 'sections', type: 'array', default: '[]', desc: 'CSS selectors for section boundary tracking' },
+  { name: 'color', type: 'string', default: "'#a855f7'", desc: 'Primary accent color' },
+  { name: 'height', type: 'number', default: '2', desc: 'Bar height in pixels' },
+  { name: 'glowIntensity', type: 'number', default: '1', desc: 'Glow brightness multiplier (0-3)' },
   { name: 'zIndex', type: 'number', default: '9999', desc: 'z-index of the fixed bar' },
-  { name: 'trailing', type: 'boolean', default: 'true', desc: 'Show a secondary fainter trailing bar' },
 ]
 
 function Section({ title, children }) {
@@ -36,17 +32,6 @@ function ColorRow({ label, value, onChange }) {
   )
 }
 
-function ToggleRow({ label, value, onChange }) {
-  return (
-    <div className="gp-row">
-      <span className="gp-label">{label}</span>
-      <button className={`gp-toggle ${value ? 'active' : ''}`} onClick={() => onChange(!value)}>
-        {value ? 'On' : 'Off'}
-      </button>
-    </div>
-  )
-}
-
 function RangeRow({ label, value, min, max, step, onChange }) {
   return (
     <div className="gp-row">
@@ -57,49 +42,67 @@ function RangeRow({ label, value, min, max, step, onChange }) {
   )
 }
 
-const SECTION_COLORS = ['#2a1a3a', '#1a2a3a', '#1a3a2a', '#3a2a1a', '#2a2a4a', '#1a3a3a']
+const SECTIONS = [
+  {
+    title: 'Getting Started',
+    subtitle: 'A brief introduction to the component',
+    lines: ['The scroll progress component provides a subtle visual cue', 'that keeps users oriented as they navigate long content.', 'It appears as a thin bar at the top of the viewport,', 'smoothly animating from left to right as the user scrolls.', 'The component works in any container and respects', 'both window and element-level scroll containers.'],
+  },
+  {
+    title: 'Core Features',
+    subtitle: 'What makes it stand out',
+    lines: ['Customizable accent color with real-time preview.', 'Adjustable bar height from subtle to prominent.', 'Configurable glow intensity for the ambient light effect.', 'Automatic positioning relative to the scroll container.', 'Zero external dependencies — pure CSS and JS.', 'Smooth requestAnimationFrame-based animation.'],
+  },
+  {
+    title: 'Integration Guide',
+    subtitle: 'Adding it to your project',
+    lines: ['Simply copy the component and CSS into your project.', 'Import and place it at the top of your component tree.', 'Pass optional props to customize appearance.', 'The component automatically detects the scroll container.', 'Works with both dark and light themes out of the box.', 'TypeScript definitions included in the source.'],
+  },
+  {
+    title: 'API Reference',
+    subtitle: 'Understanding the props',
+    lines: ['color — controls the progress bar accent color.', 'height — sets the bar thickness in pixels (1-6).', 'glowIntensity — multiplier for the ambient glow effect.', 'zIndex — controls the stacking order of the bar.', 'Each prop has sensible defaults for immediate use.', 'All props are optional and reactive to changes.'],
+  },
+  {
+    title: 'Performance',
+    subtitle: 'Optimized for smooth scrolling',
+    lines: ['Uses requestAnimationFrame for optimal animation timing.', 'Minimal DOM updates — only updates the bar width.', 'No layout thrashing — uses transform properties.', 'Lightweight at under 1KB gzipped.', 'No additional network requests or dependencies.', 'Works seamlessly with React 18 concurrent features.'],
+  },
+  {
+    title: 'Customization',
+    subtitle: 'Making it your own',
+    lines: ['The gradient effect uses your chosen color as a base.', 'The glow creates a subtle ambient light effect.', 'Bar smoothly fades in at the top of the page.', 'Disappears gracefully when scrolled back to top.', 'The z-index can be adjusted for your layout needs.', 'All colors and sizes integrate with your design system.'],
+  },
+]
 
 export default function ScrollProgressPlayground() {
   const [tab, setTab] = useState('Preview')
-  const [color, setColor] = useState('#7ec8e3')
-  const [height, setHeight] = useState(3)
-  const [glow, setGlow] = useState(true)
-  const [particles, setParticles] = useState(true)
-  const [particleCount, setParticleCount] = useState(20)
-  const [trailing, setTrailing] = useState(true)
+  const [color, setColor] = useState('#a855f7')
+  const [height, setHeight] = useState(2)
+  const [glowIntensity, setGlowIntensity] = useState(1)
   const [zIndex, setZIndex] = useState(9999)
 
   const reset = useCallback(() => {
-    setColor('#7ec8e3')
-    setHeight(3)
-    setGlow(true)
-    setParticles(true)
-    setParticleCount(20)
-    setTrailing(true)
+    setColor('#a855f7')
+    setHeight(2)
+    setGlowIntensity(1)
     setZIndex(9999)
   }, [])
-
-  const sections = useMemo(() =>
-    SECTION_COLORS.map((_, i) => `#sp-section-${i}`),
-  [])
 
   return (
     <div className="gp-page">
       <ScrollProgress
         color={color}
         height={height}
-        glow={glow}
-        particles={particles}
-        particleCount={particleCount}
-        trailing={trailing}
+        glowIntensity={glowIntensity}
         zIndex={zIndex}
       />
 
       <div className="gp-hero">
         <h1 className="gp-title">Scroll Progress</h1>
         <p className="gp-desc">
-          A thin progress bar at the top of the page that tracks scroll progress with particle bursts
-          at section boundaries. Scroll down to see it in action.
+          A sleek, minimal progress bar that tracks scroll position. Customize the color,
+          height, and glow intensity. Scroll down to see it in action.
         </p>
       </div>
 
@@ -122,13 +125,8 @@ export default function ScrollProgressPlayground() {
                     <div className="gp-preview-controls" style={{ flex: '1', minWidth: '240px', borderRight: 'none', maxHeight: 'none', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}>
                       <Section title="APPEARANCE">
                         <ColorRow label="Color" value={color} onChange={e => setColor(e.target.value)} />
-                        <RangeRow label="Height" value={height} min={1} max={8} step={1} onChange={setHeight} />
-                        <ToggleRow label="Glow" value={glow} onChange={setGlow} />
-                        <ToggleRow label="Trailing" value={trailing} onChange={setTrailing} />
-                      </Section>
-                      <Section title="PARTICLES">
-                        <ToggleRow label="Particles" value={particles} onChange={setParticles} />
-                        <RangeRow label="Count" value={particleCount} min={5} max={50} step={1} onChange={setParticleCount} />
+                        <RangeRow label="Height" value={height} min={1} max={6} step={1} onChange={setHeight} />
+                        <RangeRow label="Glow" value={glowIntensity} min={0} max={3} step={0.1} onChange={setGlowIntensity} />
                       </Section>
                       <Section title="LAYER">
                         <RangeRow label="zIndex" value={zIndex} min={1} max={99999} step={1} onChange={setZIndex} />
@@ -141,11 +139,10 @@ export default function ScrollProgressPlayground() {
 
 function Demo() {
   return (
-    <ScrollProgress
-      color="#7ec8e3"
-      height={3}
-      glow
-      particles
+                    <ScrollProgress
+      color="#a855f7"
+      height={2}
+      glowIntensity={1}
     />
   )
 }`}</pre>
@@ -154,27 +151,77 @@ function Demo() {
                   </div>
 
                   <p className="gp-doc-p" style={{ marginBottom: '32px', color: 'var(--text-dim)', fontSize: '12px' }}>
-                    Scroll down to see the progress bar advance and particles burst at section boundaries (every 20%).
+                    Scroll down to see the progress bar advance smoothly.
                   </p>
 
-                  {SECTION_COLORS.map((bg, i) => (
+                  {SECTIONS.map((s, i) => (
                     <div
                       key={i}
-                      id={`sp-section-${i}`}
                       style={{
-                        height: i === SECTION_COLORS.length - 1 ? '300px' : '360px',
-                        background: bg,
-                        borderRadius: 'var(--radius)',
-                        marginBottom: '24px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        minHeight: '320px',
+                        padding: '40px',
+                        borderRadius: 'var(--radius-lg)',
+                        marginBottom: '32px',
                         border: '1px solid var(--border)',
+                        background: `linear-gradient(135deg, rgba(168, 85, 247, ${0.02 * (i + 1)}), transparent)`,
+                        position: 'relative',
+                        overflow: 'hidden',
                       }}
                     >
-                      <span style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', fontSize: '13px', opacity: 0.6 }}>
-                        Section {i + 1}
-                      </span>
+                      <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '2px',
+                        background: 'linear-gradient(90deg, transparent, var(--accent), transparent)',
+                        opacity: 0.4,
+                      }} />
+                      <div style={{ maxWidth: '520px' }}>
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '12px',
+                          marginBottom: '8px',
+                        }}>
+                          <span style={{
+                            fontSize: '10px',
+                            fontWeight: 700,
+                            letterSpacing: '1.2px',
+                            textTransform: 'uppercase',
+                            color: 'var(--accent)',
+                            fontFamily: 'var(--font-mono)',
+                          }}>
+                            Section {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span style={{ width: '24px', height: '1px', background: 'var(--border)' }} />
+                        </div>
+                        <h3 style={{
+                          fontSize: '22px',
+                          fontWeight: 700,
+                          color: 'var(--text-primary)',
+                          marginBottom: '6px',
+                          letterSpacing: '-0.4px',
+                        }}>{s.title}</h3>
+                        <p style={{
+                          fontSize: '13px',
+                          color: 'var(--text-dim)',
+                          marginBottom: '20px',
+                          fontFamily: 'var(--font-mono)',
+                        }}>{s.subtitle}</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                          {s.lines.map((line, li) => (
+                            <p key={li} style={{
+                              fontSize: '13px',
+                              lineHeight: '1.7',
+                              color: 'var(--text-secondary)',
+                              margin: 0,
+                              paddingLeft: '12px',
+                              borderLeft: `2px solid var(--${li % 2 === 0 ? 'border' : 'border-light'})`,
+                            }}>{line}</p>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>

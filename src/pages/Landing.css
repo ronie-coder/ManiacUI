@@ -13,17 +13,17 @@
   inset: 0;
   background:
     radial-gradient(ellipse 80% 60% at 50% -20%, var(--accent-glow) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(126, 200, 227, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 20% 60%, rgba(126, 200, 227, 0.03) 0%, transparent 50%);
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(168, 85, 247, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 20% 60%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
 
 [data-theme='light'] .landing-gradient {
   background:
-    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(74, 154, 184, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(74, 154, 184, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 20% 60%, rgba(74, 154, 184, 0.02) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(147, 51, 234, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(147, 51, 234, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 20% 60%, rgba(147, 51, 234, 0.02) 0%, transparent 50%);
 }
 
 .landing-grid {
@@ -192,7 +192,7 @@
   border-radius: 20px;
   background: var(--accent-glow);
   color: var(--accent);
-  border: 1px solid rgba(126, 200, 227, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.1);
   margin-bottom: 24px;
 }
 
@@ -302,7 +302,7 @@
   height: 200px;
   top: 15%;
   right: -5%;
-  background: radial-gradient(circle at 30% 30%, rgba(126, 200, 227, 0.08), transparent 60%);
+  background: radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.08), transparent 60%);
   animation: orbFloat 8s ease-in-out infinite reverse;
 }
 
@@ -311,7 +311,7 @@
   height: 120px;
   bottom: 10%;
   left: -10%;
-  background: radial-gradient(circle at 30% 30%, rgba(126, 200, 227, 0.06), transparent 60%);
+  background: radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.06), transparent 60%);
   animation: orbFloat 5s ease-in-out infinite 1s;
 }
 
@@ -490,7 +490,7 @@
 
 .landing-feature-icon svg {
   display: block;
-  filter: drop-shadow(0 0 12px rgba(126, 200, 227, 0.2));
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.2));
 }
 
 .landing-feature-title {
@@ -547,7 +547,7 @@
   margin: 0 auto 20px;
   border-radius: 50%;
   background: var(--accent-glow);
-  border: 1px solid rgba(126, 200, 227, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;

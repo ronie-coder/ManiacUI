@@ -41,6 +41,20 @@
   box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
 }
 
+.lc-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.lc-overlay > * {
+  pointer-events: auto;
+}
+
 @keyframes lc-pulse {
   0%, 100% {
     transform: scale(1);

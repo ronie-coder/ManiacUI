@@ -5,7 +5,8 @@ const COMPONENTS = [
   { id: 'carousel', name: '3D Carousel', desc: '3D spinning carousel with drag physics' },
   { id: 'lanyard', name: 'Lanyard', desc: '3D ID badge with physics strap' },
   { id: 'blob', name: 'Blob', desc: 'Organic morphing 3D shape' },
-  { id: 'tiltcard', name: 'Tilt Card', desc: '3D perspective tilt card' },
+  { id: 'cubepit', name: 'CubePit', desc: 'Physics-driven pit of colorful cubes' },
+
   { id: 'fluidorb', name: 'Fluid Orb', desc: 'Liquid gradient blob tracking cursor' },
   { id: 'shockbutton', name: 'Shock Button', desc: 'Ripple shockwave on click' },
   { id: 'scrambletext', name: 'Scramble Text', desc: 'Character scramble with glitch' },
@@ -20,7 +21,7 @@ const COMPONENTS = [
   { id: 'kinetictext', name: 'Kinetic Text', desc: 'Physics-based letter particles' },
   { id: 'gradientmesh', name: 'Gradient Mesh', desc: 'Living mesh with drifting vertices' },
   { id: 'noiseborder', name: 'Noise Border', desc: 'Crawling SVG noise border' },
-  { id: 'scrollprogress', name: 'Scroll Progress', desc: 'Progress bar with particle bursts' },
+  { id: 'scrollprogress', name: 'Scroll Progress', desc: 'Sleek scroll progress bar with glow' },
 ]
 
 const PAGES = [

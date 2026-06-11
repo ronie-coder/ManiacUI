@@ -60,8 +60,8 @@ export default function GridMorphPlayground() {
   const [waveRadius, setWaveRadius] = useState(0.3)
   const [thickness, setThickness] = useState(15)
   const [glowIntensity, setGlowIntensity] = useState(0.15)
-  const [fadeDistance, setFadeDistance] = useState(1.5)
-  const [vignetteStrength, setVignetteStrength] = useState(2.0)
+  const [fadeDistance, setFadeDistance] = useState(3.0)
+  const [vignetteStrength, setVignetteStrength] = useState(4.0)
   const [showOverlay, setShowOverlay] = useState(true)
 
   const reset = useCallback(() => {
@@ -74,8 +74,8 @@ export default function GridMorphPlayground() {
     setWaveRadius(0.3)
     setThickness(15)
     setGlowIntensity(0.15)
-    setFadeDistance(1.5)
-    setVignetteStrength(2.0)
+    setFadeDistance(3.0)
+    setVignetteStrength(4.0)
   }, [])
 
   return (
@@ -91,7 +91,7 @@ export default function GridMorphPlayground() {
           box-sizing: border-box;
         }
         .gm-demo-card {
-          background: rgba(10,10,15,0.65);
+          background: rgba(10,10,15,0.15);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           border: 1px solid rgba(255,255,255,0.08);
